@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}"
+      th:replace="~{/index :: dynamic(~{ :: body})}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-8 d-flex justify-content-center">
+            <form th:action="@{/back}" method="get">
+                <div class="card">
+                    <h5 class="card-header">Details</h5>
+                    <div class="card-body">
+                        <table class="table table-hover m-0 p-0">
+                            <thead>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Tên người mua</th>
+                            <th>Ngày mua</th>
+                            <th>Giá sản phẩm</th>
+                            <th>Số lượng</th>
+                            </thead>
+                            <tbody>
+
+                                <tr th:each="order: ${listdetail}">
+                                    <td th:utext="${order.gundam.id}"></td>
+                                    <td th:utext="${order.gundam.name}"></td>
+                                    <td>Hà Đình Phúc</td>
+<!--                                    <td>${order.customer}</td>-->
+                                    <td th:utext="${order.order.createdDate }"></td>
+                                    <td th:utext="${order.price }"></td>
+                                    <td th:utext="${order.quantity }"></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+<!--              <div class="col-4 offset-6 pt-2">-->
+<!--             <a href="/listorder" class="btn btn-primary">${orderid.total }</a>-->
+<!--                </div>-->
+    </div>
+</div>
+</body>
+</html>

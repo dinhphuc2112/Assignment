@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}"
+      th:replace="~{/index :: dynamic(~{ :: body})}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div class="container">
+    <form th:action="@{/gundam/deleteList}" method="get">
+        <div class="card">
+            <div class="card-header">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-3 fs-5">Manage gundam</div>
+                    <div class="col-2">
+                        <a class="btn btn-success ml-5" th:href="@{/gundam/add}">Add</a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="delete" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">Are you sure that you want to
+                                        delete all clothes are choosed?</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover m-0 p-0">
+                    <thead>
+                    <th>Name</th>
+                    <th>Created Date</th>
+                    <th>Type</th>
+                    <th>Photo</th>
+                    <th>Origin</th>
+                    <th>Ratio</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th colspan="2">Activity</th>
+                    </thead>
+                    <tbody>
+
+                        <tr th:each="gundam: ${listgundam}">
+                            <td th:text="${gundam.name}">Name</td>
+                            <td th:text="${gundam.createdDate}">Created Date</td>
+                            <td th:text="${gundam.type }"></td>
+                            <td th:text="${gundam.photo }"></td>
+                            <td th:text="${gundam.origin }"></td>
+                            <td th:text="${gundam.ratio }"></td>
+                            <td th:text="${gundam.quantity }"></td>
+                            <td th:text="${gundam.price }"></td>
+                            <td><a class="btn btn-warning" style="background-color: #7abaff"
+                                   th:href="@{/gundam/edit(id=${gundam.id})}">Update
+                            </a></td>
+                            <td>
+                                <!-- Button trigger modal -->
+                                <a class="btn btn-danger"
+
+                                   data-target="deleteGundam"  th:href="@{/gundam/delete(id=${gundam.id})}">Delete</a>
+<!--                                <div class="modal fade" id="deleteGundam"-->
+<!--                                     tabindex="-1" role="dialog"-->
+<!--                                     aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--                                    <div class="modal-dialog" role="document">-->
+<!--                                        <div class="modal-content">-->
+<!--                                            <div class="modal-header">-->
+<!--                                                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>-->
+<!--                                                <button type="button" class="close" data-dismiss="modal"-->
+<!--                                                        aria-label="Close">-->
+<!--                                                    <span aria-hidden="true">&times;</span>-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+<!--                                            <div class="modal-body">Are you sure that you want to-->
+<!--                                                delete this?</div>-->
+<!--                                            <div class="modal-footer">-->
+<!--                                                <button type="button" class="btn btn-secondary"-->
+<!--                                                        data-dismiss="modal">Close</button>-->
+<!--                                                <a class="btn btn-danger"-->
+<!--                                                   th:href="@{/gundam/delete(id=${gundam.id})}"> Yes </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+<!--            <div class="card-footer">-->
+<!--                <div class="d-flex justify-content-center">-->
+<!--                    <a class="btn btn-primary me-1 ${currentPage==0?'disabled':'' }" th:href="@{/allgundam?page=0}"-->
+<!--                    > <span-->
+<!--                            class="fas fa-backward"></span>-->
+<!--                    </a> <a class="btn btn-primary me-1 ${currentPage==0?'disabled':'' }" th:href="@{/allgundam?page=${currentPage-1 }}"-->
+<!--                > < <span-->
+<!--                        class="fas fa-backward-step"></span>-->
+<!--                </a>-->
+<!--                    <h3 th:text="${currentPage+1 }/${maxPage }"></h3>-->
+<!--                    <a class="btn btn-primary me-1 ${currentPage==maxPage-1?'disabled':'' }" th:href="@{/allgundam?page=${currentPage+1 }}"-->
+<!--                    > > <span-->
+<!--                            class="fas fa-forward-step"></span>-->
+<!--                    </a> <a class="btn btn-primary ${currentPage==maxPage-1?'disabled':'' }" th:href="@{/allgundam(page=${maxPage-1 })}"-->
+<!--                > <span-->
+<!--                        class="fas fa-forward"></span>-->
+<!--                </a>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+    </form>
+</div>
+</body>
+</html>
