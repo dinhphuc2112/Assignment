@@ -27,30 +27,30 @@ public class GundamController {
     private String showIndex(Model model, @RequestParam(name = "name", defaultValue = "") String name) {
         List<Gundam> gundam = gundamService.getByName(name);
         model.addAttribute("listgundam", gundam);
-        model.addAttribute("view", "/WEB-INF/views/shop.jsp");
-        System.out.println(gundam);
-        return "index";
+//        model.addAttribute("view", "/WEB-INF/views/shop.jsp");
+//        System.out.println(gundam);
+        return "shop";
     }
 
     @GetMapping("/allgundam")
     private String showAllWGundam(Model model,@RequestParam(name = "page",defaultValue = "0") Integer page) {
-        Page<Gundam> gundam = gundamRepository.findAll(PageRequest.of(page, 5));
+        Page<Gundam> gundam = gundamRepository.findAll(PageRequest.of(page, 10));
         model.addAttribute("listgundam", gundam.getContent());
         model.addAttribute("currentPage", gundam.getNumber());
         model.addAttribute("maxPage", gundam.getTotalPages());
-        model.addAttribute("view", "/WEB-INF/views/all.jsp");
-        return "index";
+        return "all";
+
     }
 
     @GetMapping("/gundam/add")
-    private String addWater(Model model, Gundam gundam) {
+    private String addGundam(Model model, Gundam gundam) {
         Type[] gundamType = Type.values();
         model.addAttribute("type", gundamType);
-        model.addAttribute("view", "/WEB-INF/views/add.jsp");
-        return "index";
+//        model.addAttribute("view", "/WEB-INF/views/add.jsp");
+        return "add";
     }
     @PostMapping("/gundam/new")
-    private String newWater(Gundam gundam) {
+    private String newGundam(Gundam gundam) {
         gundam.setCreatedDate();
         gundamService.add(gundam);
         return "redirect:/allgundam";
@@ -61,11 +61,11 @@ public class GundamController {
         Gundam w = gundamService.findById(id);
         model.addAttribute("gundam", w);
         model.addAttribute("type", types);
-        model.addAttribute("view","/WEB-INF/views/update.jsp");
-        return "index";
+//        model.addAttribute("view","/WEB-INF/views/update.jsp");
+        return "update";
     }
     @PostMapping("/gundam/update")
-    private String updateWater(@RequestParam(name = "id") Integer id,Gundam gundam) {
+    private String updateGundam(@RequestParam(name = "id") Integer id,Gundam gundam) {
         gundam.setCreatedDate();
         gundamService.update(id, gundam);
         return "redirect:/allgundam";
@@ -81,7 +81,7 @@ public class GundamController {
         List<Gundam> w = gundamRepository.findAll();
         model.addAttribute("listgundam", w);
         model.addAttribute("gundam", gundam);
-        model.addAttribute("view", "/WEB-INF/views/detail.jsp");
-        return "index";
+//        model.addAttribute("view", "/WEB-INF/views/detail.jsp");
+        return "detail";
     }
 }

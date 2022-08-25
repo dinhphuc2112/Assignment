@@ -22,7 +22,6 @@ public class CustomerController {
 
     @GetMapping("/registration")
     private String registration(Model model) {
-        model.addAttribute("view","/WEB-INF/views/register.jsp");
         return "index";
     }
     @PostMapping("/signup")
@@ -34,8 +33,7 @@ public class CustomerController {
     }
     @GetMapping("/login")
     private String form(Model model) {
-        model.addAttribute("view", "/WEB-INF/views/login.jsp");
-        return "index";
+        return "login";
     }
     @GetMapping("/customer/login")
     private String login(Model model, @RequestParam("email") String email, @RequestParam("pass") String pass) {

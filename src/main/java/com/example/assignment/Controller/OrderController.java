@@ -30,7 +30,7 @@ public class OrderController {
     @Autowired
     public CartService cartService;
 
-@GetMapping("/order")
+@PostMapping("/order")
 @ResponseBody
 public Object[] check(@RequestParam(name = "chk[]",required = false) Integer[] chk, @RequestParam(name="quantity[]",required = false) Integer[] quantity) {
     List<String> list=new ArrayList<>();
@@ -83,12 +83,12 @@ public Object[] check(@RequestParam(name = "chk[]",required = false) Integer[] c
         List<Cart> carts = cartService.list();
         Integer size = carts.size();
         model.addAttribute("size", size);
-        Page<Order> orders = oderResponsitory.findAll(PageRequest.of(page, 5));
+        Page<Order> orders = oderResponsitory.findAll(PageRequest.of(page, 10));
         model.addAttribute("listorder", orders.getContent());
         model.addAttribute("currentPage", orders.getNumber());
         model.addAttribute("maxPage", orders.getTotalPages());
-        model.addAttribute("view", "/WEB-INF/views/allorder.jsp");
-        return "index";
+//        model.addAttribute("view", "/WEB-INF/views/allorder.jsp");
+        return "allorder";
     }
     @GetMapping("/delete/{id}")
     private String deteteById(Model model,@PathVariable("id") Integer id) {
@@ -121,7 +121,7 @@ public Object[] check(@RequestParam(name = "chk[]",required = false) Integer[] c
         List<OrderDetail> orderDetails= orderDetailService.listOrderDetail(order);
         model.addAttribute("orderid", order);
         model.addAttribute("listdetail", orderDetails);
-        model.addAttribute("view", "/WEB-INF/views/detailorder.jsp");
-        return "index";
+//        model.addAttribute("view", "/WEB-INF/views/detailorder.jsp");
+        return "detailorder";
     }
 }

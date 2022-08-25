@@ -117,7 +117,7 @@ function order() {
 	}
 	console.log(chk)
 	$.ajax({
-		type: "get",
+		type: "post",
 		url: "/order",
 		data: {
 			chk:chk,
@@ -126,11 +126,11 @@ function order() {
 
 		success: function(data) {
 			window.location.href="/cart";
-			var a="";
+			var notification="";
 			for(var i=0;i<data.length;i++){
-				a+=data[i];
+				notification+=data[i];
 			}
-			alert(a);
+			alert(notification);
 		},
 
 		error: function() {

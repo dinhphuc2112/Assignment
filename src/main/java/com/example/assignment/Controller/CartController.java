@@ -32,8 +32,8 @@ public class CartController {
         List<Cart> carts = cartService.list();
         System.out.println(carts);
         model.addAttribute("listcart", carts);
-        model.addAttribute("view", "/WEB-INF/views/cart.jsp");
-        return "index";
+//        model.addAttribute("view", "/WEB-INF/views/cart.jsp");
+        return "cart";
     }
     @GetMapping("/addcart/{id}")
     private String add(@PathVariable Integer id, Cart cart, @RequestParam("quantity") Integer quantity) {
@@ -56,7 +56,12 @@ public class CartController {
     }
     @GetMapping("/listcart")
     private String showCart(Model model) {
-        model.addAttribute("view", "/WEB-INF/views/cart.jsp");
-        return "index";
+//        model.addAttribute("view", "/WEB-INF/views/cart.jsp");
+        return "cart";
+    }
+    @GetMapping("/delete")
+    public String delete(@RequestParam(name = "id") Integer id) {
+        cartService.delete(id);
+        return "redirect:/cart";
     }
 }
